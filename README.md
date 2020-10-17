@@ -5,9 +5,9 @@ Personal scripts to set up and tear down a Fedora workstation on cloud providers
 First set up a ~/.cloudstation.conf file based on cloudstation.example.conf. Next you can use
 these commands:
 
-* `python cloudstation.py` - Print whether an instance is already running
-* `python cloudstation.py start` - Start a new instance if one isn't already running
-* `python cloudstation.py stop` - Stop an existing instance
+* `python cloudstation.py` - Print whether an instance is already running.
+* `python cloudstation.py start` - Start a new instance if one isn't already running. Requires ssh-agent and sudo to work. Will prompt for both of those passwords at the start so you can just type them in and leave.
+* `python cloudstation.py stop` - Stop an existing instance.
 
 Once the `start` command has finished you should have the basic Fedora workstation set up and available at fedora@10.0.0.1 (10.0.0.1 being a Wireguard tunnel to it). It will also have an rsync daemon running that lets you sync to the /home/fedora/code/ directory and subdirectories like this:
 
