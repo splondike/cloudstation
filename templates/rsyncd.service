@@ -1,0 +1,10 @@
+[Unit]
+Description=Rsyncd
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/rsync --daemon --no-detach --config=/etc/rsyncd.conf
+User=fedora
+
+[Install]
+WantedBy=wireguard.service

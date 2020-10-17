@@ -1,0 +1,12 @@
+[Unit]
+Description=Wireguard
+After=firewalld.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/wg-quick up /etc/wireguard/wg0.conf
+ExecStop=/usr/bin/wg-quick down /etc/wireguard/wg0.conf
+
+[Install]
+WantedBy=network-online.target
