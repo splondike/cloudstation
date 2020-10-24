@@ -26,6 +26,7 @@ def run_ssh_script(username, remote_ip, lines, expected_return_codes=(0,), clean
     )
 
     if cleanup:
+        # TODO: I could just get the script to delete itself and then I don't need this!
         run_ssh_result(
             username, remote_ip, 'rm', '/tmp/script.sh'
         )

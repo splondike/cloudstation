@@ -21,7 +21,7 @@ class BaseProvider:
     def wait_for_instance(self):
         pass
 
-    def wait_for_ssh(self, ip):
+    def wait_for_ssh(self, ip, no_host_check=True):
         username = self.get_username_for_ssh_check()
         start = datetime.datetime.now()
         for _ in range(20):
@@ -31,7 +31,7 @@ class BaseProvider:
                     ip,
                     "true",
                     check=False,
-                    no_host_check=True,
+                    no_host_check=no_host_check,
                     timeout=5
                 )
                 if result.returncode == 0:

@@ -70,7 +70,6 @@ def run_remote_wireguard_setup(username, remote_ip, wireguard_pk):
         # the ports it needs to
         "sudo setsebool -P rsync_full_access=true",
         "sudo semanage port -a -t rsync_port_t -p tcp 12000",
-        # "sudo semanage port -a -t rsync_port_t -p udp 12000",
         "sudo systemctl enable wireguard",
         "sudo systemctl enable rsyncd",
         "sudo systemctl start wireguard",
@@ -181,6 +180,8 @@ def cmd_start(username, provider):
     logging.info("Setting up basics and server Wireguard")
     client_keys = generate_wireguard_keys()
     provider.specific_setup(ip)
+    # Wait again in case we rebooted in specific_setup
+    provider.wait_for_ssh(ip, no_host_check=False)
     server_public_key = run_remote_wireguard_setup(username, ip, client_keys['public_key'])
     logging.info("Hooking up client Wireguard")
     set_up_wireguard(ip, client_keys, server_public_key)
@@ -214,9 +215,8 @@ if __name__ == '__main__':
     provider_label = config['general']['provider']
     provider_config = config[f'provider.{provider_label}']
     if provider_label == 'aws':
-        # import aws
-        # provider = aws.Provider(provider_config)
-        raise AssertionError("Not implemented fully yet")
+        import aws
+        provider = aws.Provider(provider_config)
     elif provider_label == 'vultr':
         import vultr
         provider = vultr.Provider(provider_config)
