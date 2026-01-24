@@ -1,4 +1,4 @@
-Personal scripts to set up and tear down a Fedora workstation on cloud providers (currently Vultr and AWS). Fairly idiosyncratic to the way I have things set up and like them to work, and a little rough around the edges.
+Personal scripts to set up and tear down a linux workstation on cloud providers (currently Vultr and AWS). Fairly idiosyncratic to the way I have things set up and like them to work, and a little rough around the edges.
 
 # Usage
 
@@ -9,7 +9,7 @@ these commands:
 * `python cloudstation.py start` - Start a new instance if one isn't already running. Requires ssh-agent and sudo to work. Will prompt for both of those passwords at the start so you can just type them in and leave.
 * `python cloudstation.py stop` - Stop an existing instance.
 
-Once the `start` command has finished you should have the basic Fedora workstation set up and available at fedora@10.0.0.1 (10.0.0.1 being a Wireguard tunnel to it). It will also have an rsync daemon running that lets you sync to the /home/fedora/code/ directory and subdirectories like this:
+Once the `start` command has finished you should have the basic linux workstation set up and available at normal@10.0.0.1 (10.0.0.1 being a Wireguard tunnel to it). It will also have an rsync daemon running that lets you sync to the /home/normal/code/ directory and subdirectories like this:
 
     rsync -rvnc mydir rsync://10.0.0.1:12000/files/code-subdir
 
@@ -17,7 +17,7 @@ You might want to drop this into your .ssh/config so you can just do `ssh clouds
 
     Host cloudstation
         HostName 10.0.0.1
-        User fedora
+        User normal
 
 ## More provisioning
 

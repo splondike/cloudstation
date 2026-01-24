@@ -32,7 +32,7 @@ class BaseProvider:
                     "true",
                     check=False,
                     no_host_check=no_host_check,
-                    timeout=5
+                    timeout=5,
                 )
                 if result.returncode == 0:
                     return

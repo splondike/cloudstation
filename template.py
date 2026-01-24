@@ -14,7 +14,7 @@ def build_template(template_file, params={}) -> str:
     """
 
     basedir = pathlib.Path(__file__).parent.absolute()
-    with open(os.path.join(basedir, 'templates', template_file), 'r') as fh:
+    with open(os.path.join(basedir, "templates", template_file), "r") as fh:
         template = Template(fh.read())
 
     return template.substitute(**params)
